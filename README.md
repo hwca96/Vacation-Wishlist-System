@@ -17,8 +17,9 @@ This project can be the beginning of a platform to help travel lovers keep track
 - As a user, I want to remove a vacation from the application.
 - As a user, I want to add attractions to a vacation
 - As a user, I want to remove attractions in a vacation
+- As a user, I want to check an attraction as completed.
 - As a user, I want to give/change the priority level to the attraction.
-- As a user, I want to view all the attractions in a vacation.
+- As a user, I want to view all the attractions in a vacation sorted by priority level.
 - As a user, I want to attach and remove comments to the attraction.
 
 A *bulleted* list:
