@@ -1,18 +1,24 @@
-# Course Management System
+# Vacation Wishlist Management System
 
 ## Project Description
-The purpose of this project is build a desktop application that helps students to keep track of course assignments, deadlines, and other course related activities.
+The purpose of this project is build a desktop application that helps to organize vacation planning related items such as attractions to see,
+transportations, and specific restaurants that one wishes to visit.
 
-I often find that the courses at UBC tend to use different technologies across different faculties such as webwork, gradescope, edx, etc. 
-This causes the course material to scattered across different platforms which might cause confusion. 
-Different course also tend to use different methods of communications such as Canvas notifications, emails, or piazza posts.
-This application is designed for students to stay organized by providing a top-down view of all the courses and keep track of all the course updates in one place.
+Admist the COVID-19 pandemic, many people's vacation plans were put on hold.
+As the recreational travel slowly opens back up, I have found myself researching about potential vacations and attractions in the hopes that I can visit them after the restrictions have been lifted.
+However, I find that it is difficult to keep track of the different vacation related items as they can come from many sources such as blogs, youtube videos, or facebook posts.
+This desktop application can be used by anyone who wished to plan and keep track of their vacations but can also serve as a wishlist tracker for travel items.
 
-I often struggle to stay organized in my courses. I have tried using organization apps in the past but I have not found one that is designed for students.
-The ideal application will be flexible enough for the user to customize the view of the courses and be able to connect in some way to the different technologies used by different courses.
-
+This project interests me as I look forward to the return of recreational travel and I am sure I am not the only one. 
+This project can be the beginning of a platform to help travel lovers keep track of their travel wishlists and quickly plan their trips once the travel restrictions are lifted. 
 ## User Stories
-- As a user, I want ...
+- As a user, I want to add new vacations to the application.
+- As a user, I want to remove a vacation from the application.
+- As a user, I want to add attractions to a vacation
+- As a user, I want to remove attractions in a vacation
+- As a user, I want to give/change the priority level to the attraction.
+- As a user, I want to view all the attractions in a vacation.
+- As a user, I want to attach and remove comments to the attraction.
 
 A *bulleted* list:
 - item 1
