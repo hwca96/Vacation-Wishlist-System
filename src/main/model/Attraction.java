@@ -69,6 +69,7 @@ public class Attraction {
     // MODIFIES: this
     // EFFECT: Removes a comment at the given position and returns true.
     // If the given index does not exist then do nothing
+    // NOTE: Unused for this iteration, will be using for future functionalities
     public void removeComment(int position) {
         if (position >= 0 && position <= this.comments.size()) {
             this.comments.remove(position - 1);

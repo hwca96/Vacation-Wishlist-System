@@ -75,17 +75,21 @@ public class VacationManagementSystem {
         } else if (isNumeric(command)) {
             int select = Integer.parseInt(command);
             boolean inVacationMenu = true;
-            Vacation selectedVacation = vacationCollection.getVacationByPosition(select);
+            try {
+                Vacation selectedVacation = vacationCollection.getVacationByPosition(select);
 
-            while (inVacationMenu) {
-                displayVacationMenu(selectedVacation);
-                String commandVacation = input.next();
+                while (inVacationMenu) {
+                    displayVacationMenu(selectedVacation);
+                    String commandVacation = input.next();
 
-                if (commandVacation.equals("back")) {
-                    inVacationMenu = false;
-                } else {
-                    processVacationCommand(commandVacation, selectedVacation);
+                    if (commandVacation.equals("back")) {
+                        inVacationMenu = false;
+                    } else {
+                        processVacationCommand(commandVacation, selectedVacation);
+                    }
                 }
+            } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
+                System.out.println("That position does not exist.");
             }
         } else {
             System.out.println("Invalid Input...");
@@ -150,17 +154,21 @@ public class VacationManagementSystem {
         } else if (isNumeric(vacationCommand)) {
             int selected = Integer.parseInt(vacationCommand);
             boolean inAttractionMenu = true;
-            Attraction selectedAttraction = selectedVacation.getAttractionByPosition(selected);
+            try {
+                Attraction selectedAttraction = selectedVacation.getAttractionByPosition(selected);
 
-            while (inAttractionMenu) {
-                displayAttractionMenu(selectedAttraction);
-                String commandAttraction = input.next();
+                while (inAttractionMenu) {
+                    displayAttractionMenu(selectedAttraction);
+                    String commandAttraction = input.next();
 
-                if (commandAttraction.equals("back")) {
-                    inAttractionMenu = false;
-                } else {
-                    processAttractionCommand(commandAttraction, selectedAttraction);
+                    if (commandAttraction.equals("back")) {
+                        inAttractionMenu = false;
+                    } else {
+                        processAttractionCommand(commandAttraction, selectedAttraction);
+                    }
                 }
+            } catch (NullPointerException nullPointerException) {
+                System.out.println("That position does not exist.");
             }
         } else {
             System.out.println("\nThat is not a valid input...");

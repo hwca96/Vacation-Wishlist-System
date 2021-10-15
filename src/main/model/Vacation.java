@@ -42,6 +42,7 @@ public class Vacation {
 
     // MODIFIES: this
     // EFFECT: Searches the listOfAttraction and removes the attraction with the given name
+    // NOTE: Unused for this iteration, will be using for future functionalities
     public void removeAttraction(String name) {
         listOfAttractions.removeIf(a -> a.getName().equals(name));
     }
@@ -59,6 +60,7 @@ public class Vacation {
     }
 
     // EFFECT: Returns the Attraction with the give name. Returns null if the no such name exists.
+    // NOTE: Unused for this iteration, will be using for future functionalities
     public Attraction getAttractionByName(String name) {
         Attraction result = null;
 
