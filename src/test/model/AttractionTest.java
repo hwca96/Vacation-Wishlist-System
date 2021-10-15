@@ -75,6 +75,4 @@ class AttractionTest {
         assertEquals(3, testAttraction.getComments().size());
 
     }
-
-
 }
