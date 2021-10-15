@@ -59,6 +59,9 @@ public class VacationTest {
 
         assertEquals("test1", testVacation.getAttractionByPosition(1).getName());
         assertEquals("test2", testVacation.getAttractionByPosition(2).getName());
+
+        // Invalid positions
+        assertNull(testVacation.getAttractionByPosition(-5));
         assertNull(testVacation.getAttractionByPosition(3));
     }
 

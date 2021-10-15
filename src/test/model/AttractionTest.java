@@ -69,10 +69,12 @@ class AttractionTest {
         assertEquals("test3", testAttraction.getComments().get(1));
         assertEquals(3, testAttraction.getComments().size());
 
-        //Not in Range
+        //out of range positions
         testAttraction.removeComment(100);
-        assertEquals("test3", testAttraction.getComments().get(1));
         assertEquals(3, testAttraction.getComments().size());
 
+        //invalid positions
+        testAttraction.removeComment(-100);
+        assertEquals(3, testAttraction.getComments().size());
     }
 }
