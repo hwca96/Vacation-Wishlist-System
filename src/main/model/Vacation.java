@@ -71,7 +71,8 @@ public class Vacation {
     }
 
     //MODIFIES: this
-    //EFFECT: Sorts the listOfAttractions by priority in descending order
+    //EFFECT: Sorts the listOfAttractions by priority in descending order\
+    //NOTE: this method is unused in P1, will be used for later functionalities.
     public void sortAttractionsPriority() {
         listOfAttractions.sort(Comparator.comparing(Attraction::getPriority).reversed());
     }

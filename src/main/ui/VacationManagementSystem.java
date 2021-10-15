@@ -6,6 +6,7 @@ import model.VacationCollection;
 
 import java.util.Scanner;
 
+// Vacation Management System
 public class VacationManagementSystem {
     private VacationCollection vacationCollection;
     private Scanner input = new Scanner(System.in);
@@ -15,6 +16,8 @@ public class VacationManagementSystem {
         runVacationManagementSystem();
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up the application, processes user inputs, and display the ui information
     private void runVacationManagementSystem() {
         boolean running = true;
         String command;
@@ -35,10 +38,13 @@ public class VacationManagementSystem {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes the VacationCollection
     private void init() {
         this.vacationCollection = new VacationCollection();
     }
 
+    // EFFECTS: Displays the vacation collection menu showing vacations and the available input options
     private void displayVacationCollectionMenu() {
         if (vacationCollection.isEmpty()) {
             System.out.println("There is no vacation stored in the system");
@@ -61,6 +67,8 @@ public class VacationManagementSystem {
         System.out.println("\tquit");
     }
 
+    // MODIFIES: this
+    // EFFECTS: Processes the input from the vacation collection menu
     private void processVacationCollectionCommand(String command) {
         if (command.equals("n")) {
             addNewVacation();
@@ -84,6 +92,9 @@ public class VacationManagementSystem {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds a new vacation to the vacation collection with a name inputted by the user,
+    // but prints an error message if another vacation with the same name already exists.
     private void addNewVacation() {
         System.out.println("Enter the vacation name: ");
         input.nextLine(); // This is needed to clear the keyboard buffers so the line can be recorded
@@ -96,6 +107,7 @@ public class VacationManagementSystem {
         }
     }
 
+    // EFFECTS: Produce true if the given string can be converted into an integer
     private boolean isNumeric(String command) {
         try {
             Integer.parseInt(command);
@@ -105,6 +117,8 @@ public class VacationManagementSystem {
         return true;
     }
 
+    // EFFECTS: Displays the vacation menu showing the attractions in the given vacation
+    // and the available inputs options
     private void displayVacationMenu(Vacation vacation) {
         if (vacation.getAttractions().isEmpty()) {
             System.out.println("There is no attractions stored in this vacation");
@@ -128,6 +142,8 @@ public class VacationManagementSystem {
         System.out.println("\tback");
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes the input from the vacation menu
     private void processVacationCommand(String vacationCommand, Vacation selectedVacation) {
         if (vacationCommand.equals("n")) {
             addNewAttraction(selectedVacation);
@@ -151,6 +167,9 @@ public class VacationManagementSystem {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: Adds a new attraction to the given vacation with a name inputted by the user,
+    // but prints an error message if there is already another attraction with the same name
     private void addNewAttraction(Vacation vacation) {
         System.out.println("Enter the attraction name: ");
         input.nextLine(); // This is needed to clear the keyboard buffers so the line can be recorded
@@ -159,10 +178,11 @@ public class VacationManagementSystem {
         if (vacation.addAttraction(attractionToAdd)) {
             System.out.println("Attraction Added");
         } else {
-            System.out.println("There is another attraction with the same name. Please try another name.");
+            System.out.println("There is another attraction with the same name. Please try a different name.");
         }
     }
 
+    // EFFECTS: displays the attraction menu showing details of the attraction with available input options
     private void displayAttractionMenu(Attraction attraction) {
         System.out.println("\n" + attraction.getName());
         System.out.println("\tCompleted: " + attraction.isCompleted());
@@ -183,6 +203,8 @@ public class VacationManagementSystem {
         System.out.println("\tback");
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes the input from the attraction menu
     private void processAttractionCommand(String command, Attraction attraction) {
         if (command.equals("a")) {
             attraction.markCompleted();
