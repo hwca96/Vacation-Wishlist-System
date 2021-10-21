@@ -3,8 +3,10 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+// A collection of Vacation that will be viewed in the application
+
 public class VacationCollection {
-    private List<Vacation> vacationCollection;
+    private List<Vacation> vacationCollection; // The list of vacations
 
     public VacationCollection() {
         this.vacationCollection = new ArrayList<>();

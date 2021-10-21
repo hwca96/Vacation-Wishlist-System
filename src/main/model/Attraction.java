@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+// An attraction with its completed status, priority, and comments
+
 public class Attraction {
     private String name; //the name of the attraction
     private boolean completed; //completion status of the attraction

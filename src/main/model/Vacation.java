@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+// A vacation with its list of attractions
+
 public class Vacation {
     private String name; // the name of the vacation
     private List<Attraction> listOfAttractions; // the list of attractions for this vacation
