@@ -1,6 +1,5 @@
 package persistence;
 
-import model.Vacation;
 import model.VacationCollection;
 import org.json.JSONObject;
 

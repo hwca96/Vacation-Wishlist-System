@@ -1,0 +1,37 @@
+{"vacations": [
+    {
+        "vacationName": "Japan",
+        "attractions": [
+            {
+                "comments": [],
+                "completed": false,
+                "priority": 0,
+                "attractionName": "Osaka"
+            },
+            {
+                "comments": [],
+                "completed": false,
+                "priority": 0,
+                "attractionName": "Tokyo"
+            }
+        ]
+    },
+    {
+        "vacationName": "Paris",
+        "attractions": [{
+            "comments": ["Museum"],
+            "completed": true,
+            "priority": 5,
+            "attractionName": "Louvre"
+        }]
+    },
+    {
+        "vacationName": "US",
+        "attractions": [{
+            "comments": [],
+            "completed": false,
+            "priority": 0,
+            "attractionName": "LA"
+        }]
+    }
+]}
