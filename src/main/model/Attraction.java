@@ -1,11 +1,15 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 // An attraction with its completed status, priority, and comments
 
-public class Attraction {
+public class Attraction implements Writable {
     private String name; //the name of the attraction
     private boolean completed; //completion status of the attraction
     private int priority; //priority level of the attraction [0,5]
@@ -76,5 +80,26 @@ public class Attraction {
         if (position >= 0 && position <= this.comments.size()) {
             this.comments.remove(position - 1);
         }
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("attractionName", name);
+        jsonObject.put("completed", completed);
+        jsonObject.put("priority", priority);
+        jsonObject.put("comments", commentsToJson());
+
+        return jsonObject;
+    }
+
+    // EFFECTS: returns the comments in this attraction as a JSON array
+    private JSONArray commentsToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (String comment : comments) {
+            jsonArray.put(comment);
+        }
+
+        return jsonArray;
     }
 }

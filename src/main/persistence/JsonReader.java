@@ -1,5 +1,6 @@
 package persistence;
 
+import model.Attraction;
 import model.Vacation;
 import model.VacationCollection;
 import org.json.JSONArray;
@@ -77,10 +78,23 @@ public class JsonReader {
 
     private void addAttraction(Vacation vacation, JSONObject jsonObject) {
         String name = jsonObject.getString("attractionName");
-        boolean completed = jsonObject.getBoolean("completed");
-        int priority = jsonObject.getInt("priority");
-        //TODO
-    }
 
+        Attraction attraction = new Attraction(name);
+
+        boolean completed = jsonObject.getBoolean("completed");
+        if (completed) {
+            attraction.markCompleted();
+        }
+
+        int priority = jsonObject.getInt("priority");
+        attraction.changePriority(priority);
+
+        JSONArray jsonArray = jsonObject.getJSONArray("comments");
+        for (Object json : jsonArray) {
+            JSONObject commentToAdd = (JSONObject) json;
+            String comment = commentToAdd.getString("comment");
+            attraction.addComment(comment);
+        }
+    }
 
 }

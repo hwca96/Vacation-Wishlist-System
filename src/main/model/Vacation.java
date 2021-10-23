@@ -1,12 +1,16 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 // A vacation with its list of attractions
 
-public class Vacation {
+public class Vacation implements Writable {
     private String name; // the name of the vacation
     private List<Attraction> listOfAttractions; // the list of attractions for this vacation
 
@@ -79,5 +83,24 @@ public class Vacation {
     //NOTE: this method is unused in P1, will be used for later functionalities.
     public void sortAttractionsPriority() {
         listOfAttractions.sort(Comparator.comparing(Attraction::getPriority).reversed());
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("vacationName", name);
+        jsonObject.put("attractions", listOfAttractionsToJson());
+        return jsonObject;
+    }
+
+    // EFFECTS: returns attractions in this vacation as a JSON array
+    private JSONArray listOfAttractionsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Attraction attraction : listOfAttractions) {
+            jsonArray.put(attraction.toJson());
+        }
+
+        return jsonArray;
     }
 }
