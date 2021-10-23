@@ -50,7 +50,7 @@ public class JsonReader {
     }
 
     // MODIFIES: vacationCollection
-    // EFFECTS: parse vacations stored in the json and adds them to the vacation collection
+    // EFFECTS: parse vacations stored in the json and add them to the vacation collection
     private void addVacations(VacationCollection vacationCollection, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("vacations");
         for (Object json : jsonArray) {
@@ -59,6 +59,8 @@ public class JsonReader {
         }
     }
 
+    // MODIFIES: vacationCollection
+    // EFFECTS: Add the vacation stored in the Json object and add the attractions inside the vacation
     private void addVacation(VacationCollection vacationCollection, JSONObject jsonObject) {
         String name = jsonObject.getString("vacationName");
         Vacation vacation = new Vacation(name);
@@ -68,6 +70,8 @@ public class JsonReader {
         vacationCollection.addVacation(vacation);
     }
 
+    // MODIFIES: vacation
+    // EFFECTS: parse attractions stored in the json and add them to the vacation
     private void addAttractions(Vacation vacation, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("attractions");
         for (Object json : jsonArray) {
@@ -76,6 +80,8 @@ public class JsonReader {
         }
     }
 
+    // MODIFIES: vacation
+    // EFFECTS: parse the attraction data stored in the json and add it to the vacation
     private void addAttraction(Vacation vacation, JSONObject jsonObject) {
         String name = jsonObject.getString("attractionName");
 
@@ -90,11 +96,12 @@ public class JsonReader {
         attraction.changePriority(priority);
 
         JSONArray jsonArray = jsonObject.getJSONArray("comments");
-        for (Object json : jsonArray) {
-            JSONObject commentToAdd = (JSONObject) json;
-            String comment = commentToAdd.getString("comment");
+        for (Object o : jsonArray) {
+            String comment = o.toString();
             attraction.addComment(comment);
         }
+
+        vacation.addAttraction(attraction);
     }
 
 }

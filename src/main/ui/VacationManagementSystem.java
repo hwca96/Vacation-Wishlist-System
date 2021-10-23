@@ -6,18 +6,24 @@ import model.VacationCollection;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 // Vacation Management System
 public class VacationManagementSystem {
     private VacationCollection vacationCollection;
-    private Scanner input = new Scanner(System.in);
+    private Scanner input;
     private static final String JSON_STORE = "./data/vacationCollection.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
     // EFFECT: Start the application
-    public VacationManagementSystem() {
+    public VacationManagementSystem() throws FileNotFoundException {
+        input = new Scanner(System.in);
+        vacationCollection = new VacationCollection();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runVacationManagementSystem();
     }
 
@@ -80,9 +86,9 @@ public class VacationManagementSystem {
         if (command.equals("n")) {
             addNewVacation();
         } else if (command.equals("s")) {
-            //saveWorkRoom(); //TODO
+            saveWorkRoom();
         } else if (command.equals("l")) {
-            //loadWorkRoom(); //TODO
+            loadWorkRoom();
         } else if (isNumeric(command)) {
             int select = Integer.parseInt(command);
             try {
@@ -94,6 +100,7 @@ public class VacationManagementSystem {
             System.out.println("Invalid Input...");
         }
     }
+
 
     private void vacationMenu(int select) throws IndexOutOfBoundsException {
         Vacation selectedVacation = vacationCollection.getVacationByPosition(select);
@@ -158,6 +165,7 @@ public class VacationManagementSystem {
             n++;
         }
         System.out.println("\tn - add new attraction");
+        System.out.println("\ts - save to file");
         System.out.println("\tback");
     }
 
@@ -166,6 +174,8 @@ public class VacationManagementSystem {
     private void processVacationCommand(String vacationCommand, Vacation selectedVacation) {
         if (vacationCommand.equals("n")) {
             addNewAttraction(selectedVacation);
+        } else if (vacationCommand.equals("s")) {
+            saveWorkRoom();
         } else if (isNumeric(vacationCommand)) {
             int selected = Integer.parseInt(vacationCommand);
             try {
@@ -227,6 +237,7 @@ public class VacationManagementSystem {
         System.out.println("\tb - mark not completed");
         System.out.println("\tc - set priority");
         System.out.println("\td - add comment");
+        System.out.println("\ts - save to file");
         System.out.println("\tback");
     }
 
@@ -252,8 +263,30 @@ public class VacationManagementSystem {
             input.nextLine(); // This is needed to clear the keyboard buffers so the line can be recorded
             String comment = input.nextLine();
             attraction.addComment(comment);
+        } else if (command.equals("s")) {
+            saveWorkRoom();
         } else {
             System.out.println("\nThat is not a valid input...");
+        }
+    }
+
+    private void loadWorkRoom() {
+        try {
+            vacationCollection = jsonReader.read();
+            System.out.println("Loaded data from: " + JSON_STORE);
+        } catch (IOException ioException) {
+            System.out.println("Error while loading file from: " + JSON_STORE);
+        }
+    }
+
+    private void saveWorkRoom() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(vacationCollection);
+            jsonWriter.close();
+            System.out.println("Saved data to " + JSON_STORE);
+        } catch (FileNotFoundException fileNotFoundException) {
+            System.out.println("Error while saving file to: " + JSON_STORE);
         }
     }
 }
