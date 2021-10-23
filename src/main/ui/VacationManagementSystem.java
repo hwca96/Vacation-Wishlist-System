@@ -3,6 +3,8 @@ package ui;
 import model.Attraction;
 import model.Vacation;
 import model.VacationCollection;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import java.util.Scanner;
 
@@ -10,6 +12,9 @@ import java.util.Scanner;
 public class VacationManagementSystem {
     private VacationCollection vacationCollection;
     private Scanner input = new Scanner(System.in);
+    private static final String JSON_STORE = "./data/vacationCollection.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECT: Start the application
     public VacationManagementSystem() {
@@ -64,6 +69,8 @@ public class VacationManagementSystem {
             n++;
         }
         System.out.println("\tn - new vacation");
+        System.out.println("\ts - save to file");
+        System.out.println("\tl - load from file");
         System.out.println("\tquit");
     }
 
@@ -72,27 +79,35 @@ public class VacationManagementSystem {
     private void processVacationCollectionCommand(String command) {
         if (command.equals("n")) {
             addNewVacation();
+        } else if (command.equals("s")) {
+            //saveWorkRoom(); //TODO
+        } else if (command.equals("l")) {
+            //loadWorkRoom(); //TODO
         } else if (isNumeric(command)) {
             int select = Integer.parseInt(command);
-            boolean inVacationMenu = true;
             try {
-                Vacation selectedVacation = vacationCollection.getVacationByPosition(select);
-
-                while (inVacationMenu) {
-                    displayVacationMenu(selectedVacation);
-                    String commandVacation = input.next();
-
-                    if (commandVacation.equals("back")) {
-                        inVacationMenu = false;
-                    } else {
-                        processVacationCommand(commandVacation, selectedVacation);
-                    }
-                }
+                vacationMenu(select);
             } catch (IndexOutOfBoundsException indexOutOfBoundsException) {
                 System.out.println("That position does not exist.");
             }
         } else {
             System.out.println("Invalid Input...");
+        }
+    }
+
+    private void vacationMenu(int select) throws IndexOutOfBoundsException {
+        Vacation selectedVacation = vacationCollection.getVacationByPosition(select);
+        boolean inVacationMenu = true;
+
+        while (inVacationMenu) {
+            displayVacationMenu(selectedVacation);
+            String commandVacation = input.next();
+
+            if (commandVacation.equals("back")) {
+                inVacationMenu = false;
+            } else {
+                processVacationCommand(commandVacation, selectedVacation);
+            }
         }
     }
 
@@ -153,25 +168,29 @@ public class VacationManagementSystem {
             addNewAttraction(selectedVacation);
         } else if (isNumeric(vacationCommand)) {
             int selected = Integer.parseInt(vacationCommand);
-            boolean inAttractionMenu = true;
             try {
-                Attraction selectedAttraction = selectedVacation.getAttractionByPosition(selected);
-
-                while (inAttractionMenu) {
-                    displayAttractionMenu(selectedAttraction);
-                    String commandAttraction = input.next();
-
-                    if (commandAttraction.equals("back")) {
-                        inAttractionMenu = false;
-                    } else {
-                        processAttractionCommand(commandAttraction, selectedAttraction);
-                    }
-                }
+                attractionMenu(selectedVacation, selected);
             } catch (NullPointerException nullPointerException) {
                 System.out.println("That position does not exist.");
             }
         } else {
             System.out.println("\nThat is not a valid input...");
+        }
+    }
+
+    private void attractionMenu(Vacation selectedVacation, int selected) {
+        Attraction selectedAttraction = selectedVacation.getAttractionByPosition(selected);
+        boolean inAttractionMenu = true;
+
+        while (inAttractionMenu) {
+            displayAttractionMenu(selectedAttraction);
+            String commandAttraction = input.next();
+
+            if (commandAttraction.equals("back")) {
+                inAttractionMenu = false;
+            } else {
+                processAttractionCommand(commandAttraction, selectedAttraction);
+            }
         }
     }
 
