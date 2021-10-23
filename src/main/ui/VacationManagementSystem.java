@@ -249,15 +249,7 @@ public class VacationManagementSystem {
         } else if (command.equals("b")) {
             attraction.markNotCompleted();
         } else if (command.equals("c")) {
-            boolean notValid = true;
-            while (notValid) {
-                System.out.println("\nSelect an integer between 0 and 5: ");
-                String priority = input.next();
-                if (isNumeric(priority) && Integer.parseInt(priority) >= 0 && Integer.parseInt(priority) <= 5) {
-                    notValid = false;
-                    attraction.changePriority(Integer.parseInt(priority));
-                }
-            }
+            changePriority(attraction);
         } else if (command.equals("d")) {
             System.out.println("\nWhat is your comment: ");
             input.nextLine(); // This is needed to clear the keyboard buffers so the line can be recorded
@@ -267,6 +259,18 @@ public class VacationManagementSystem {
             saveWorkRoom();
         } else {
             System.out.println("\nThat is not a valid input...");
+        }
+    }
+
+    private void changePriority(Attraction attraction) {
+        boolean notValid = true;
+        while (notValid) {
+            System.out.println("\nSelect an integer between 0 and 5: ");
+            String priority = input.next();
+            if (isNumeric(priority) && Integer.parseInt(priority) >= 0 && Integer.parseInt(priority) <= 5) {
+                notValid = false;
+                attraction.changePriority(Integer.parseInt(priority));
+            }
         }
     }
 
