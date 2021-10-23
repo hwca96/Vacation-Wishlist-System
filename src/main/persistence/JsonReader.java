@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Stream;
 
+// Class based on design from JSONSerializationDemo
 // Represents a json reader that reads a vacation collection stored in a json file
 public class JsonReader {
     private String source;

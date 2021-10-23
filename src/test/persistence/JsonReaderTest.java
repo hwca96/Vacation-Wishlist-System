@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+// Tests based on design from JSONSerializationDemo
 public class JsonReaderTest extends JsonTest{
 
     @Test

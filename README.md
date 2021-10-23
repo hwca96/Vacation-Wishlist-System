@@ -23,4 +23,3 @@ This project can be the beginning of a platform to help travel lovers keep track
 **Iteration 2**
 - As a user, I want to save any changes to each vacation and attraction.
 - As a user, I want to load vacation and attraction data from a file.
-- (BONUS) As a user, I want to export specific vacation or attraction data as a file.

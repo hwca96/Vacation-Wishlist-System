@@ -7,6 +7,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+// Tests based on design from JSONSerializationDemo
 public class JsonTest {
     protected void checkVacation(String vacationName, Vacation vacation) {
         assertEquals(vacationName, vacation.getName());

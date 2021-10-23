@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+// Class based on design from JSONSerializationDemo
 // A JSON writer that writes the vacation collection data to file
 public class JsonWriter {
     private static final int TAB = 4;
