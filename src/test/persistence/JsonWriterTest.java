@@ -63,7 +63,7 @@ public class JsonWriterTest extends JsonTest {
             List<Attraction> parisAttractions = vacations.get(1).getAttractions();
             List<Attraction> usAttractions = vacations.get(2).getAttractions();
 
-            // Attractions in japan are all default data other than the name
+            // Attractions in Japan are all default data other than the name
             assertEquals("Osaka", japanAttractions.get(0).getName());
             assertEquals("Tokyo", japanAttractions.get(1).getName());
 
@@ -79,7 +79,7 @@ public class JsonWriterTest extends JsonTest {
         }
     }
 
-    // EFFECTS: Returns a vacationCollection that is the same as the data in testReaderGeneral.json
+    // EFFECTS: Returns a vacationCollection that will be passed into testWriterGeneral.json
     private VacationCollection setUpTestVacationCollection() {
         VacationCollection vacationCollection = new VacationCollection();
         Vacation japan = new Vacation("Japan");
