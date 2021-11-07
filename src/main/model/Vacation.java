@@ -103,4 +103,9 @@ public class Vacation implements Writable {
 
         return jsonArray;
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

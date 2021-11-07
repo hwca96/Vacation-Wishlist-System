@@ -72,4 +72,11 @@ public class VacationCollection implements Writable {
 
         return jsonArray;
     }
+
+    // MODIFIES: this
+    // EFFECTS: removes the given vacation from vacationCollection
+    // TODO tests
+    public void remove(Vacation selectedVacation) {
+        vacationCollection.remove(selectedVacation);
+    }
 }
