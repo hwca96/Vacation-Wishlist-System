@@ -33,5 +33,9 @@
             "priority": 0,
             "attractionName": "LA"
         }]
+    },
+    {
+        "vacationName": "Testing",
+        "attractions": []
     }
 ]}

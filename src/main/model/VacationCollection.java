@@ -76,7 +76,7 @@ public class VacationCollection implements Writable {
     // MODIFIES: this
     // EFFECTS: removes the given vacation from vacationCollection
     // TODO tests
-    public void remove(Vacation selectedVacation) {
-        vacationCollection.remove(selectedVacation);
+    public void remove(int index) {
+        vacationCollection.remove(index);
     }
 }

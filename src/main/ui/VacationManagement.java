@@ -13,18 +13,19 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class VacationManagement extends JFrame {
+public class VacationManagement extends JFrame implements ActionListener {
 
     private JMenuBar menuBar;
     private VacationPanel vacationPanel;
-    private AttractionPanel attractionPanel;
 
     private VacationCollection vacationCollection;
-    private Vacation currentVacation = null;
-    private Attraction currentAttraction = null;
     private static final String JSON_STORE = "./data/vacationCollection.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
+
+    JMenuItem loadItem;
+    JMenuItem saveItem;
+    JMenuItem exitItem;
 
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 1000;
@@ -64,8 +65,6 @@ public class VacationManagement extends JFrame {
         vacationCollection = new VacationCollection();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
-
-        loadVacationCollection();
     }
 
     // MODIFIES: this
@@ -93,30 +92,17 @@ public class VacationManagement extends JFrame {
         menuBar.add(helpMenu);
     }
 
+
     // MODIFIES: this, fileMenu
     // EFFECTS: add menu items to the file menu and handles action depending on the selection in this menu
     private void addFileMenuItems(JMenu fileMenu) {
-        JMenuItem loadItem = new JMenuItem("Load");
-        JMenuItem saveItem = new JMenuItem("Save");
-        JMenuItem exitItem = new JMenuItem("Exit");
+        loadItem = new JMenuItem("Load");
+        saveItem = new JMenuItem("Save");
+        exitItem = new JMenuItem("Exit");
 
-        ActionListener actionListener = e -> {
-            if (e.getSource().equals(loadItem)) {
-                loadVacationCollection();
-                System.out.println("loaded");
-            }
-            if (e.getSource().equals(saveItem)) {
-                saveVacationCollection();
-                System.out.println("saved");
-            }
-            if (e.getSource().equals(exitItem)) {
-                System.exit(0);
-            }
-        };
-
-        loadItem.addActionListener(actionListener);
-        fileMenu.addActionListener(actionListener);
-        exitItem.addActionListener(actionListener);
+        loadItem.addActionListener(this);
+        fileMenu.addActionListener(this);
+        exitItem.addActionListener(this);
 
         fileMenu.add(loadItem);
         fileMenu.add(saveItem);
@@ -147,4 +133,16 @@ public class VacationManagement extends JFrame {
         }
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == saveItem) {
+            saveVacationCollection();
+        }
+        if (e.getSource() == loadItem) {
+            loadVacationCollection();
+        }
+        if (e.getSource() == exitItem) {
+            System.exit(0);
+        }
+    }
 }
