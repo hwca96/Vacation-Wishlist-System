@@ -27,8 +27,8 @@ public class VacationManagement extends JFrame implements ActionListener {
     JMenuItem saveItem;
     JMenuItem exitItem;
 
-    public static final int WIDTH = 1000;
-    public static final int HEIGHT = 1000;
+    public static final int WIDTH = 1920;
+    public static final int HEIGHT = 1080;
 
     // Constructs the main VacationManagementSystem window
     // MODIFIES: this
@@ -40,6 +40,8 @@ public class VacationManagement extends JFrame implements ActionListener {
 
         initializeDataFields();
         initializeUiFields();
+
+        this.pack();
 
         setVisible(true);
 
@@ -55,7 +57,7 @@ public class VacationManagement extends JFrame implements ActionListener {
 
         vacationPanel = new VacationPanel(vacationCollection);
 
-        add(vacationPanel);
+        add(vacationPanel, BorderLayout.WEST);
 
     }
 

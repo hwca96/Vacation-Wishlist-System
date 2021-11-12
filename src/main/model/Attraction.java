@@ -10,6 +10,8 @@ import java.util.List;
 // An attraction with its completed status, priority, and comments
 
 public class Attraction implements Writable {
+    private static final int MAX_PRIORITY = 5;
+
     private String name; //the name of the attraction
     private boolean completed; //completion status of the attraction
     private int priority; //priority level of the attraction [0,5]
@@ -42,6 +44,10 @@ public class Attraction implements Writable {
         return comments;
     }
 
+    public int getMaxPriority() {
+        return MAX_PRIORITY;
+    }
+
     // MODIFIES: this
     // EFFECT: Change the completed status to true
     public void markCompleted() {
@@ -52,6 +58,20 @@ public class Attraction implements Writable {
     // EFFECT: Changes the completed status to false
     public void markNotCompleted() {
         this.completed = false;
+    }
+
+    // TODO TESTS
+    // MODIFIES: this
+    // EFFECT: If the input is not null and not full of white spaces
+    // , change the attraction name and return true, otherwise return false
+    public void changeName(String name) {
+        this.name = name;
+    }
+
+    // TODO Tests
+    // EFFECTS: return true if the name is not empty and not full of white spaces
+    public static boolean checkNameValid(String input) {
+        return input != "" && input.trim().length() > 0;
     }
 
     // MODIFIES: this

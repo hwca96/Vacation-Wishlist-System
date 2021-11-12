@@ -1,5 +1,6 @@
 package ui;
 
+import model.Attraction;
 import model.Vacation;
 import model.VacationCollection;
 import persistence.JsonReader;
@@ -17,9 +18,9 @@ import java.io.IOException;
 public class VacationPanel extends JPanel implements ListSelectionListener, ActionListener {
 
     private VacationCollection vacationCollection;
-    private static final int WIDTH = 1000;
-    private static final int HEIGHT = 1000;
-    private static final int BUTTONS_HEIGHT = 200;
+    private static final int WIDTH = 1980;
+    private static final int HEIGHT = 1080;
+    private static final int BUTTONS_HEIGHT = 100;
     private static final int ROWS = 5;
 
     private static final String JSON_STORE = "./data/vacationCollection.json";
@@ -33,21 +34,19 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
     private JButton deleteButton;
     private JButton loadButton;
     private JButton saveButton;
+    private JButton addAttractionButton;
 
     private JSplitPane splitPane;
-    private JPanel vacationPanel;
-    private AttractionPanel attractionPanel;
+    private AttractionPanel attractionPanel; //TODO
 
 
     // CONSTRUCTOR
     // MODIFIES: this
     public VacationPanel(VacationCollection vc) {
         this.vacationCollection = vc;
-        vacationPanel = new JPanel();
-        splitPane = new JSplitPane();
+        this.setLayout(new BorderLayout());
+
         attractionPanel = new AttractionPanel();
-        splitPane.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        splitPane.setLayout(new BorderLayout());
 
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
@@ -64,13 +63,15 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
         buttonPanel.add(deleteButton);
         buttonPanel.add(loadButton);
         buttonPanel.add(saveButton);
+        buttonPanel.add(addAttractionButton);
 
-        vacationPanel.add(listScrollPane, BorderLayout.NORTH);
-        vacationPanel.add(buttonPanel, BorderLayout.SOUTH);
-
-        splitPane.add(vacationPanel);
+        splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, listScrollPane, attractionPanel);
+        splitPane.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        splitPane.setOneTouchExpandable(true);
+        splitPane.setDividerLocation(WIDTH / 4);
 
         this.add(splitPane);
+        this.add(buttonPanel, BorderLayout.SOUTH);
     }
 
     // MODIFIES: this
@@ -92,6 +93,11 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
         saveButton = new JButton("Save");
         saveButton.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 32));
         saveButton.addActionListener(this);
+
+        addAttractionButton = new JButton("Add Attraction");
+        addAttractionButton.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 32));
+        addAttractionButton.addActionListener(this);
+        addAttractionButton.setEnabled(false);
     }
 
     // MODIFIES: this
@@ -115,19 +121,30 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
         return list.getSelectedIndex();
     }
 
+    // EFFECTS: Returns the selected Vacation, return null if nothing is selected
+    public Vacation getSelectedVacation() {
+        if (getSelectedVacationIndex() == -1) {
+            return null;
+        } else {
+            return vacationCollection.getVacationByPosition(getSelectedVacationIndex() + 1);
+        }
+    }
+
     // MODIFIES: this
     // EFFECTS: handles the change of selection in the Scroll Pane,
     // only enable the delete button if the list is not empty and a vacation has been selected
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting() == false) {
+            attractionPanel.updateVacation(getSelectedVacation());
             if (listModel.size() == 0 || list.getSelectedIndex() == -1) {
                 deleteButton.setEnabled(false);
+                addAttractionButton.setEnabled(false);
             } else {
                 deleteButton.setEnabled(true);
+                addAttractionButton.setEnabled(true);
             }
         }
-
     }
 
     // MODIFIES: this
@@ -149,7 +166,22 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
         if (source == saveButton) {
             handleSaveButton();
         }
+        if (source == addAttractionButton) {
+            handleAddAttractionButton();
+        }
+    }
 
+    private void handleAddAttractionButton() {
+        String input = JOptionPane.showInputDialog(null, "Enter a New Attraction Name: ", null);
+        if (Attraction.checkNameValid(input)) {
+            Attraction attractionToAdd = new Attraction(input);
+            Vacation selectedVacation = getSelectedVacation();
+            selectedVacation.addAttraction(attractionToAdd);
+            attractionPanel.updateVacation(selectedVacation);
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid Name, please enter another name",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void handleDeleteButton() {
@@ -174,6 +206,7 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
         }
     }
 
+    // TODO move to vacation
     // EFFECTS: returns true if the input name is not empty, full of white spaces,
     // and already exists in another vacation. Display pop up messages to show the corresponding errors.
     private boolean checkValidName(String newName) {
@@ -190,6 +223,7 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
         return notValid;
     }
 
+    // TODO move to vacation
     // EFFECTS: Returns true if the input name already exists in another vacation
     private boolean containsName(String newName) {
         Boolean result = false;
@@ -206,6 +240,7 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
     private void handleLoadButton() {
         try {
             vacationCollection = jsonReader.read();
+            listModel.removeAllElements();
             for (Vacation vacation : vacationCollection.getVacationCollection()) {
                 listModel.addElement(vacation);
             }

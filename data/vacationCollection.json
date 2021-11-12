@@ -5,13 +5,13 @@
             {
                 "comments": [],
                 "completed": false,
-                "priority": 5,
+                "priority": 1,
                 "attractionName": "Osaka"
             },
             {
                 "comments": [],
-                "completed": false,
-                "priority": 0,
+                "completed": true,
+                "priority": 3,
                 "attractionName": "Tokyo"
             }
         ]

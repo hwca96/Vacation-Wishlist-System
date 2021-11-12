@@ -66,13 +66,13 @@ public class Vacation implements Writable {
     }
 
     // EFFECT: Returns the Attraction with the give name. Returns null if the no such name exists.
-    // NOTE: Unused for this iteration, will be using for future functionalities
     public Attraction getAttractionByName(String name) {
         Attraction result = null;
 
         for (Attraction a:listOfAttractions) {
             if (a.getName().equals(name)) {
                 result = a;
+                break;
             }
         }
         return result;
