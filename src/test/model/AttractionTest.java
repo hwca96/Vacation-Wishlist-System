@@ -79,9 +79,7 @@ class AttractionTest {
     }
 
     @Test
-    void checkNameValidTest() {
-        assertTrue(Attraction.checkNameValid("test12345"));
-        assertFalse(Attraction.checkNameValid(""));
-        assertFalse(Attraction.checkNameValid("      "));
+    void toStringTest() {
+        assertEquals(testAttraction.getName(), testAttraction.toString());
     }
 }

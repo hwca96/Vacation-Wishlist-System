@@ -53,7 +53,6 @@ public class Vacation implements Writable {
         listOfAttractions.removeIf(a -> a.getName().equals(name));
     }
 
-    // TODO Tests
     // EFFECTS: return true if the name is not empty and not full of white spaces
     public static boolean checkNameValid(String input) {
         return !input.equals("") && input.trim().length() > 0;

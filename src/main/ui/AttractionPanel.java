@@ -168,7 +168,7 @@ public class AttractionPanel extends JPanel {
         list.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if (e.getValueIsAdjusting() == false) {
+                if (!e.getValueIsAdjusting()) {
                     if (listModel.size() == 0 || list.getSelectedIndex() == -1) {
                         deleteCommentButton.setEnabled(false);
                     } else {
@@ -286,8 +286,8 @@ public class AttractionPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String input = JOptionPane.showInputDialog(null, "Enter a New Attraction Name: ", null);
-                if (Attraction.checkNameValid(input)) {
-                    attraction.changeName(input);
+                if (checkNameValid(input)) {
+                    attraction.setName(input);
                     updateVacation(vacation);
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid Name, please enter another name",
@@ -296,6 +296,11 @@ public class AttractionPanel extends JPanel {
             }
         });
         return editNameButton;
+    }
+
+    // EFFECTS: return true if the name is not empty and not full of white spaces
+    public static boolean checkNameValid(String input) {
+        return !input.equals("") && input.trim().length() > 0;
     }
 
     // EFFECTS: Returns a JLabel of the attraction name with font size i
@@ -324,7 +329,7 @@ public class AttractionPanel extends JPanel {
             filledStar.setAlignmentX(Component.CENTER_ALIGNMENT);
             stars.add(filledStar);
         }
-        for (int i = 1; i <= attraction.getMaxPriority() - priority; i++) {
+        for (int i = 1; i <= attraction.MAX_PRIORITY - priority; i++) {
             JLabel emptyStar = new JLabel(emptyStarImage);
             emptyStar.setAlignmentX(Component.CENTER_ALIGNMENT);
             stars.add(emptyStar);

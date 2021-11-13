@@ -29,8 +29,8 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-    private JList list;
-    private DefaultListModel listModel;
+    private JList<Object> list;
+    private DefaultListModel<Vacation> listModel;
 
     private JButton newButton;
     private JButton deleteButton;
@@ -151,7 +151,7 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
     // if the list is not empty and a vacation has been selected
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        if (e.getValueIsAdjusting() == false) {
+        if (!e.getValueIsAdjusting()) {
             attractionPanel.updateVacation(getSelectedVacation());
             if (listModel.size() == 0 || list.getSelectedIndex() == -1) {
                 deleteButton.setEnabled(false);
@@ -192,7 +192,7 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
     // If the name is not valid, display an error. Then refreshes the UI
     private void handleAddAttractionButton() {
         String input = JOptionPane.showInputDialog(null, "Enter a New Attraction Name: ", null);
-        if (Attraction.checkNameValid(input)) {
+        if (checkNameValid(input)) {
             Attraction attractionToAdd = new Attraction(input);
             Vacation selectedVacation = getSelectedVacation();
             selectedVacation.addAttraction(attractionToAdd);
@@ -201,6 +201,11 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
             JOptionPane.showMessageDialog(null, "Invalid Name, please enter another name",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    // EFFECTS: return true if the name is not empty and not full of white spaces
+    public static boolean checkNameValid(String input) {
+        return !input.equals("") && input.trim().length() > 0;
     }
 
     // MODIFIES: this

@@ -99,4 +99,9 @@ public class VacationTest {
         assertEquals(highPriorityAttraction, testVacation.getAttractionByPosition(1));
     }
 
+    @Test
+    void toStringTest() {
+        assertEquals(testVacation.getName(), testVacation.toString());
+    }
+
 }
