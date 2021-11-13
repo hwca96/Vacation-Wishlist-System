@@ -82,4 +82,10 @@ class AttractionTest {
     void toStringTest() {
         assertEquals(testAttraction.getName(), testAttraction.toString());
     }
+
+    @Test
+    void setNameTest() {
+        testAttraction.setName("changed");
+        assertEquals("changed", testAttraction.getName());
+    }
 }

@@ -236,7 +236,7 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
     // and already exists in another vacation. Display pop up messages to show the corresponding errors.
     private boolean checkValidName(String newName) {
         Boolean notValid = false;
-        if (!Vacation.checkNameValid(newName)) {
+        if (!checkNameValid(newName)) {
             JOptionPane.showMessageDialog(null, "Invalid Name, please enter another name",
                     "Error", JOptionPane.ERROR_MESSAGE);
             notValid = true;

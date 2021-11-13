@@ -5,7 +5,7 @@
             {
                 "comments": [],
                 "completed": false,
-                "priority": 1,
+                "priority": 5,
                 "attractionName": "Osaka"
             },
             {
@@ -33,9 +33,5 @@
             "priority": 0,
             "attractionName": "LA"
         }]
-    },
-    {
-        "vacationName": "Test",
-        "attractions": []
     }
 ]}
