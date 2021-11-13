@@ -56,10 +56,9 @@ public class VacationCollection implements Writable {
     }
 
 
-    // TODO tests
     // EFFECTS: Returns true if the input name already exists in another vacation
     public boolean containsName(String newName) {
-        Boolean result = false;
+        boolean result = false;
         for (Vacation vacation : vacationCollection) {
             if (newName.equals(vacation.getName())) {
                 result = true;
@@ -87,9 +86,9 @@ public class VacationCollection implements Writable {
         return jsonArray;
     }
 
+    // REQUIRES: the given index must be in range
     // MODIFIES: this
     // EFFECTS: removes the given vacation from vacationCollection
-    // TODO tests
     public void remove(int index) {
         vacationCollection.remove(index);
     }

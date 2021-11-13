@@ -62,4 +62,32 @@ public class VacationCollectionTest {
             assertEquals("test" + i, result);
         }
     }
+
+    @Test
+    void containsNameFalseTest() {
+        testVacationCollection.addVacation(testVacation);
+        assertFalse(testVacationCollection.containsName("Does not contain"));
+    }
+
+    @Test
+    void containsNameTrueTest() {
+        testVacationCollection.addVacation(testVacation);
+        assertTrue(testVacationCollection.containsName(testVacation.getName()));
+    }
+
+    @Test
+    void removeTest() {
+        Vacation testVacation2 = new Vacation("test2");
+        testVacationCollection.addVacation(testVacation);
+        testVacationCollection.addVacation(testVacation2);
+
+        testVacationCollection.remove(1);
+
+        assertEquals(1, testVacationCollection.getVacationCollection().size());
+        assertEquals(testVacation, testVacationCollection.getVacationByPosition(1));
+
+        testVacationCollection.remove(0);
+
+        assertEquals(0, testVacationCollection.getVacationCollection().size());
+    }
 }

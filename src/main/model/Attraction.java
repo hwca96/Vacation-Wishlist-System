@@ -60,7 +60,6 @@ public class Attraction implements Writable {
         this.completed = false;
     }
 
-    // TODO TESTS
     // MODIFIES: this
     // EFFECT: If the input is not null and not full of white spaces
     // , change the attraction name and return true, otherwise return false
@@ -68,10 +67,9 @@ public class Attraction implements Writable {
         this.name = name;
     }
 
-    // TODO Tests
     // EFFECTS: return true if the name is not empty and not full of white spaces
     public static boolean checkNameValid(String input) {
-        return input != "" && input.trim().length() > 0;
+        return !input.equals("") && input.trim().length() > 0;
     }
 
     // MODIFIES: this

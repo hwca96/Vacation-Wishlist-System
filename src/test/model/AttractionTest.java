@@ -77,4 +77,11 @@ class AttractionTest {
         testAttraction.removeComment(-100);
         assertEquals(3, testAttraction.getComments().size());
     }
+
+    @Test
+    void checkNameValidTest() {
+        assertTrue(Attraction.checkNameValid("test12345"));
+        assertFalse(Attraction.checkNameValid(""));
+        assertFalse(Attraction.checkNameValid("      "));
+    }
 }
