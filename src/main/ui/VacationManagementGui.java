@@ -1,7 +1,5 @@
 package ui;
 
-import model.Attraction;
-import model.Vacation;
 import model.VacationCollection;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -13,7 +11,8 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class VacationManagement extends JFrame implements ActionListener {
+// Vacation Management System Graphical User Interface
+public class VacationManagementGui extends JFrame implements ActionListener {
 
     private JMenuBar menuBar;
     private VacationPanel vacationPanel;
@@ -32,7 +31,7 @@ public class VacationManagement extends JFrame implements ActionListener {
 
     // Constructs the main VacationManagementSystem window
     // MODIFIES: this
-    public VacationManagement() throws FileNotFoundException {
+    public VacationManagementGui() throws FileNotFoundException {
         super("Vacation Management System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
@@ -135,6 +134,7 @@ public class VacationManagement extends JFrame implements ActionListener {
         }
     }
 
+    // EFFECTS: handles the action of each menu items
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == saveItem) {

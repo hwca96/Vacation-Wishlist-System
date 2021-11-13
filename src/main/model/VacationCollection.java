@@ -55,6 +55,20 @@ public class VacationCollection implements Writable {
         return this.vacationCollection.get(position - 1);
     }
 
+
+    // TODO tests
+    // EFFECTS: Returns true if the input name already exists in another vacation
+    public boolean containsName(String newName) {
+        Boolean result = false;
+        for (Vacation vacation : vacationCollection) {
+            if (newName.equals(vacation.getName())) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+
     @Override
     public JSONObject toJson() {
         JSONObject jsonObject = new JSONObject();

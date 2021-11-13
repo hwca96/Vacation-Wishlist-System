@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-// Vacation Management System
+// Vacation Management System Console Interface
 public class VacationManagementSystem {
     private VacationCollection vacationCollection;
     private Scanner input;

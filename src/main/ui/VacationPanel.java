@@ -15,11 +15,13 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+// Panel containing information about VacationCollection, Vacation, and Attraction
 public class VacationPanel extends JPanel implements ListSelectionListener, ActionListener {
 
+    public static final Font STANDARD_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 32);
     private VacationCollection vacationCollection;
-    private static final int WIDTH = 1980;
-    private static final int HEIGHT = 1080;
+    public static final int WIDTH = 1980;
+    public static final int HEIGHT = 1080;
     private static final int BUTTONS_HEIGHT = 100;
     private static final int ROWS = 5;
 
@@ -37,7 +39,7 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
     private JButton addAttractionButton;
 
     private JSplitPane splitPane;
-    private AttractionPanel attractionPanel; //TODO
+    private AttractionPanel attractionPanel;
 
 
     // CONSTRUCTOR
@@ -46,6 +48,10 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
         this.vacationCollection = vc;
         this.setLayout(new BorderLayout());
 
+        initializeUi();
+    }
+
+    private void initializeUi() {
         attractionPanel = new AttractionPanel();
 
         jsonWriter = new JsonWriter(JSON_STORE);
@@ -75,33 +81,33 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
     }
 
     // MODIFIES: this
-    // EFFECTS: Sets up the new and delete buttons
+    // EFFECTS: Sets up the new, delete, load, save, and add attraction buttons
     private void setUpButtons() {
         newButton = new JButton("New Vacation");
-        newButton.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 32));
+        newButton.setFont(STANDARD_FONT);
         newButton.addActionListener(this);
 
         deleteButton = new JButton("Delete Vacation");
-        deleteButton.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 32));
+        deleteButton.setFont(STANDARD_FONT);
         deleteButton.addActionListener(this);
         deleteButton.setEnabled(false);
 
         loadButton = new JButton("Load");
-        loadButton.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 32));
+        loadButton.setFont(STANDARD_FONT);
         loadButton.addActionListener(this);
 
         saveButton = new JButton("Save");
-        saveButton.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 32));
+        saveButton.setFont(STANDARD_FONT);
         saveButton.addActionListener(this);
 
         addAttractionButton = new JButton("Add Attraction");
-        addAttractionButton.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 32));
+        addAttractionButton.setFont(STANDARD_FONT);
         addAttractionButton.addActionListener(this);
         addAttractionButton.setEnabled(false);
     }
 
     // MODIFIES: this
-    // EFFECTS: sets up the DefaultListModel and JList objects
+    // EFFECTS: sets up the DefaultListModel and JList objects for the list of vacations
     private void setUpLists() {
         listModel = new DefaultListModel();
         for (Vacation vacation : vacationCollection.getVacationCollection()) {
@@ -112,7 +118,7 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.addListSelectionListener(this);
         list.setVisibleRowCount(ROWS);
-        list.setFont(new Font(Font.SANS_SERIF,  Font.BOLD, 32));
+        list.setFont(STANDARD_FONT);
     }
 
 
@@ -131,8 +137,18 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
     }
 
     // MODIFIES: this
+    // EFFECTS: Updates the graphics to display the most current status of the data
+    public void updateVacationCollection(VacationCollection vacationCollection) {
+        this.vacationCollection = vacationCollection;
+        removeAll();
+        initializeUi();
+        updateUI();
+    }
+
+    // MODIFIES: this
     // EFFECTS: handles the change of selection in the Scroll Pane,
-    // only enable the delete button if the list is not empty and a vacation has been selected
+    // only enable the delete button and add attraction button
+    // if the list is not empty and a vacation has been selected
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting() == false) {
@@ -147,8 +163,7 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
         }
     }
 
-    // MODIFIES: this
-    // EFFECTS: handles the newButton and deleteButton Actions
+    // EFFECTS: handles the newButton, deleteButton, loadButton, saveButton, and addAttractionButton Actions
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton source = (JButton) (e.getSource());
@@ -171,6 +186,10 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
         }
     }
 
+    // MODIFIES: this
+    // EFFECT: Prompts user for a new attraction name.
+    // If the name is valid, add a new attraction to the selected vacation.
+    // If the name is not valid, display an error. Then refreshes the UI
     private void handleAddAttractionButton() {
         String input = JOptionPane.showInputDialog(null, "Enter a New Attraction Name: ", null);
         if (Attraction.checkNameValid(input)) {
@@ -184,10 +203,12 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
         }
     }
 
+    // MODIFIES: this
+    // EFFECT: deletes the selected vacation and refreshes the UI
     private void handleDeleteButton() {
         int selectedIndex = getSelectedVacationIndex();
-        listModel.remove(selectedIndex);
         vacationCollection.remove(selectedIndex);
+        updateVacationCollection(vacationCollection);
         JOptionPane.showMessageDialog(null, "Vacation Deleted", "Message", JOptionPane.PLAIN_MESSAGE);
     }
 
@@ -202,20 +223,19 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
 
         Vacation vacationToAdd = new Vacation(newName);
         if (vacationCollection.addVacation(vacationToAdd)) {
-            listModel.addElement(vacationToAdd);
+            updateVacationCollection(vacationCollection);
         }
     }
 
-    // TODO move to vacation
     // EFFECTS: returns true if the input name is not empty, full of white spaces,
     // and already exists in another vacation. Display pop up messages to show the corresponding errors.
     private boolean checkValidName(String newName) {
         Boolean notValid = false;
-        if (newName == "" || newName.trim().length() == 0) {
+        if (!Vacation.checkNameValid(newName)) {
             JOptionPane.showMessageDialog(null, "Invalid Name, please enter another name",
                     "Error", JOptionPane.ERROR_MESSAGE);
             notValid = true;
-        } else if (containsName(newName)) {
+        } else if (vacationCollection.containsName(newName)) {
             JOptionPane.showMessageDialog(null, "This name already exists, please enter another name",
                     "Error", JOptionPane.ERROR_MESSAGE);
             notValid = true;
@@ -223,27 +243,13 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
         return notValid;
     }
 
-    // TODO move to vacation
-    // EFFECTS: Returns true if the input name already exists in another vacation
-    private boolean containsName(String newName) {
-        Boolean result = false;
-        for (Vacation vacation : vacationCollection.getVacationCollection()) {
-            if (newName == vacation.getName()) {
-                result = true;
-            }
-        }
-        return result;
-    }
 
     // MODIFIES: this
     // EFFECTS: Load the vacationCollection data from JSON file at JSON_STORE
     private void handleLoadButton() {
         try {
             vacationCollection = jsonReader.read();
-            listModel.removeAllElements();
-            for (Vacation vacation : vacationCollection.getVacationCollection()) {
-                listModel.addElement(vacation);
-            }
+            updateVacationCollection(vacationCollection);
 
         } catch (IOException ioException) {
             JOptionPane.showMessageDialog(null, "Error while loading file from: " + JSON_STORE,
