@@ -16,6 +16,8 @@ public class AttractionPanel extends JPanel {
     public static final String CHECK_PNG = "./src/main/ui/Images/check.png";
     public static final String FILLED_STAR_PNG = "./src/main/ui/Images/filled_star.png";
     public static final String EMPTY_STAR_PNG = "./src/main/ui/Images/empty_star.png";
+    public static final Font BUTTON_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 20);
+
     private Vacation vacation = null;
     private JLabel nullVacationLabel;
     private JLabel emptyLabel;
@@ -199,6 +201,7 @@ public class AttractionPanel extends JPanel {
     private JButton addDeleteAttractionButton(Attraction attraction) {
         ImageIcon deleteIcon = new ImageIcon("./src/main/ui/Images/delete_icon.png");
         JButton deleteAttractionButton = new JButton(deleteIcon);
+        deleteAttractionButton.setFont(BUTTON_FONT);
         deleteAttractionButton.setText("Delete Attraction");
 
         deleteAttractionButton.addActionListener(new ActionListener() {
@@ -216,6 +219,7 @@ public class AttractionPanel extends JPanel {
     // EFFECTS: sets up and returns the deleteCommentButton with no ActionListener
     private JButton addDeleteButton() {
         JButton deleteCommentButton = new JButton("Delete Comment");
+        deleteCommentButton.setFont(BUTTON_FONT);
         deleteCommentButton.setEnabled(false);
 
         return deleteCommentButton;
@@ -225,6 +229,7 @@ public class AttractionPanel extends JPanel {
     // EFFECTS: sets up and returns the addCommentButton which will prompt to add a new comment when clicked
     private JButton addAddCommentButton(Attraction attraction) {
         JButton addCommentButton = new JButton("Add Comment");
+        addCommentButton.setFont(BUTTON_FONT);
         addCommentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -242,6 +247,7 @@ public class AttractionPanel extends JPanel {
     // EFFECTS: sets up and returns changePriorityButton which prompts to change the priority level of the attraction
     private JButton addChangePriorityButton(Attraction attraction) {
         JButton changePriorityButton = new JButton("Change Priority");
+        changePriorityButton.setFont(BUTTON_FONT);
         changePriorityButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -263,6 +269,7 @@ public class AttractionPanel extends JPanel {
     // which will mark the attraction the opposite of its completed status
     private JButton addToggleCompletedButton(Attraction attraction) {
         JButton toggleCompleteButton = new JButton("Toggle Completed");
+        toggleCompleteButton.setFont(BUTTON_FONT);
         toggleCompleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -282,6 +289,7 @@ public class AttractionPanel extends JPanel {
     // EFFECTS: sets up and returns editNameButton which prompts for a new attraction name when clicked
     private JButton addEditNameButton(Attraction attraction) {
         JButton editNameButton = new JButton("Edit Name");
+        editNameButton.setFont(BUTTON_FONT);
         editNameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -28,4 +28,4 @@ This project can be the beginning of a platform to help travel lovers keep track
 - As a user, I want to be able to add and delete vacation and attractions in the GUI.
 - As a user, I want to be able to change the information of vacations and attractions in GUI.
 - As a user, I want to save and load the state of the application in the GUI.
-- As a user, I want to see a some graphical representation of data in the application.
+- As a user, I want to see a some graphical representation of priority data in the application.

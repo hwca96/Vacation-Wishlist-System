@@ -13,6 +13,7 @@ import java.io.IOException;
 
 // Vacation Management System Graphical User Interface
 public class VacationManagementGui extends JFrame implements ActionListener {
+    public static final Font MENU_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 24);
 
     private JMenuBar menuBar;
     private VacationPanel vacationPanel;
@@ -81,16 +82,11 @@ public class VacationManagementGui extends JFrame implements ActionListener {
         menuBar = new JMenuBar();
 
         JMenu fileMenu = new JMenu("File");
-        JMenu viewMenu = new JMenu("View");
-        JMenu helpMenu = new JMenu("Help");
+        fileMenu.setFont(MENU_FONT);
 
         addFileMenuItems(fileMenu);
-//        addViewMenuItems(viewMenu); //TODO
-//        addHelpMenuItems(helpMenu); //TODO
 
         menuBar.add(fileMenu);
-        menuBar.add(viewMenu);
-        menuBar.add(helpMenu);
     }
 
 
@@ -101,8 +97,12 @@ public class VacationManagementGui extends JFrame implements ActionListener {
         saveItem = new JMenuItem("Save");
         exitItem = new JMenuItem("Exit");
 
+        loadItem.setFont(MENU_FONT);
+        saveItem.setFont(MENU_FONT);
+        exitItem.setFont(MENU_FONT);
+
         loadItem.addActionListener(this);
-        fileMenu.addActionListener(this);
+        saveItem.addActionListener(this);
         exitItem.addActionListener(this);
 
         fileMenu.add(loadItem);
@@ -115,9 +115,11 @@ public class VacationManagementGui extends JFrame implements ActionListener {
     private void loadVacationCollection() {
         try {
             vacationCollection = jsonReader.read();
-            System.out.println("Loaded data from: " + JSON_STORE); //TODO
+            vacationPanel.updateVacationCollection(vacationCollection);
+
         } catch (IOException ioException) {
-            System.out.println("Error while loading file from: " + JSON_STORE); //TODO
+            JOptionPane.showMessageDialog(null, "Error while loading file from: " + JSON_STORE,
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -128,9 +130,13 @@ public class VacationManagementGui extends JFrame implements ActionListener {
             jsonWriter.open();
             jsonWriter.write(vacationCollection);
             jsonWriter.close();
-            System.out.println("Saved data to " + JSON_STORE); //TODO
+            JOptionPane.showMessageDialog(null, "Saved data to " + JSON_STORE,
+                    "Message", JOptionPane.PLAIN_MESSAGE);
+
         } catch (FileNotFoundException fileNotFoundException) {
-            System.out.println("Error while saving file to: " + JSON_STORE); //TODO
+            JOptionPane.showMessageDialog(null, "Error while loading file from: " + JSON_STORE,
+                    "Error", JOptionPane.ERROR_MESSAGE);
+
         }
     }
 
