@@ -29,3 +29,76 @@ This project can be the beginning of a platform to help travel lovers keep track
 - As a user, I want to be able to change the information of vacations and attractions in GUI.
 - As a user, I want to save and load the state of the application in the GUI.
 - As a user, I want to see a some graphical representation of priority data in the application.
+
+**Iteration 4**
+- As a user, I want to see a console print out of logged events when the application closes.
+
+**Phase 4: Task 2**
+
+Sample log of events: (Load data, save data, then exit the application)
+
+Wed Nov 24 10:05:41 PST 2021
+
+Loaded data from JSON at ./data/vacationCollection.json
+
+Wed Nov 24 10:05:41 PST 2021
+
+Attraction: Osaka marked as complete
+
+Wed Nov 24 10:05:41 PST 2021
+
+Attraction: Osaka changed priority to 5
+
+Wed Nov 24 10:05:41 PST 2021
+
+Vacation: Japan added attraction Osaka
+
+Wed Nov 24 10:05:41 PST 2021
+
+Attraction: Tokyo changed priority to 3
+
+Wed Nov 24 10:05:41 PST 2021
+
+Vacation: Japan added attraction Tokyo
+
+Wed Nov 24 10:05:41 PST 2021
+
+New Vacation Added: Japan
+
+Wed Nov 24 10:05:41 PST 2021
+
+Attraction: Louvre marked as complete
+
+Wed Nov 24 10:05:41 PST 2021
+
+Attraction: Louvre changed priority to 4
+
+Wed Nov 24 10:05:41 PST 2021
+
+Attraction: Louvre added comment
+
+Wed Nov 24 10:05:41 PST 2021
+
+Vacation: Paris added attraction Louvre
+
+Wed Nov 24 10:05:41 PST 2021
+
+New Vacation Added: Paris
+
+Wed Nov 24 10:05:41 PST 2021
+
+Attraction: LA changed priority to 0
+
+Wed Nov 24 10:05:41 PST 2021
+
+Vacation: US added attraction LA
+
+Wed Nov 24 10:05:41 PST 2021
+
+New Vacation Added: US
+
+Wed Nov 24 10:05:43 PST 2021
+
+Saved data as JSON to ./data/vacationCollection.json
+
+Application has closed

@@ -45,7 +45,7 @@ public class JsonReader {
     // EFFECTS: parse the json object and returns the stored vacation collection
     public VacationCollection parseVacationCollection(JSONObject jsonObject) {
         VacationCollection vacationCollection = new VacationCollection();
-        addVacations(vacationCollection, jsonObject); //TODO
+        addVacations(vacationCollection, jsonObject);
         return vacationCollection;
     }
 
