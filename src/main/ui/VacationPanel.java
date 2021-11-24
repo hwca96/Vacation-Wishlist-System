@@ -19,11 +19,12 @@ import java.io.IOException;
 public class VacationPanel extends JPanel implements ListSelectionListener, ActionListener {
 
     public static final Font STANDARD_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 32);
-    private VacationCollection vacationCollection;
     public static final int WIDTH = 1980;
     public static final int HEIGHT = 1080;
     private static final int BUTTONS_HEIGHT = 100;
     private static final int ROWS = 5;
+
+    private VacationCollection vacationCollection;
 
     private static final String JSON_STORE = "./data/vacationCollection.json";
     private JsonWriter jsonWriter;

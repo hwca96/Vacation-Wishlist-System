@@ -102,3 +102,16 @@ Wed Nov 24 10:05:43 PST 2021
 Saved data as JSON to ./data/vacationCollection.json
 
 Application has closed
+
+**Phase 4: Task 3**
+- VacationManagementGui class in the ui appears to be redundant as VacationPanel
+have the same associations. There are currently very few functionalities in VacationManagementGui
+such as a menu bar and changing the application logo. 
+If I had more time, I will either delete VacationManagementGui and make VacationPanel the JFrame 
+that encompasses the whole ui application or implement more high level functionalities into VacationManagementGui 
+so it is cannot be replaced by VacationPanel.
+- Currently, all ui classes have associations with VacationCollection and Vacation.
+Ideally, the information should be passed top down from VacationManagementGui down to VacationPanel and then AttractionPanel.
+An example would be VacationManagementGui have an association with 1 VacationCollection and the other ui components will not have other associations with the model classes.
+- Building on top-down structure described in the previous point, ideally only VacationManagementGui should have associations with JsonReader and JsonWriter (eg. saving and loading data)
+This might mean there will be another class that encompasses all functionalities regarding data persistence in the application such as a dataManager class.

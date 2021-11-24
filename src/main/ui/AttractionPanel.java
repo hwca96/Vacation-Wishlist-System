@@ -17,16 +17,15 @@ public class AttractionPanel extends JPanel {
     public static final String FILLED_STAR_PNG = "./src/main/ui/Images/filled_star.png";
     public static final String EMPTY_STAR_PNG = "./src/main/ui/Images/empty_star.png";
     public static final Font BUTTON_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 20);
+    private static final int WIDTH = VacationPanel.WIDTH / 2;
+    private static final int HEIGHT = VacationPanel.HEIGHT;
+    private static final int GAP = 50;
 
     private Vacation vacation = null;
     private JLabel nullVacationLabel;
     private JLabel emptyLabel;
     private JPanel attractionPanel;
     private JScrollPane scrollPane;
-
-    private static final int WIDTH = VacationPanel.WIDTH / 2;
-    private static final int HEIGHT = VacationPanel.HEIGHT;
-    private static final int GAP = 50;
 
     // MODIFIES: this
     // EFFECTS: constructs the AttractionPanel
