@@ -35,6 +35,7 @@ public class VacationCollection implements Writable {
 
         if (result) {
             this.vacationCollection.add(vacation);
+            EventLog.getInstance().logEvent(new Event("New Vacation Added: " + vacation.getName()));
         }
         return result;
     }
@@ -90,6 +91,8 @@ public class VacationCollection implements Writable {
     // MODIFIES: this
     // EFFECTS: removes the given vacation from vacationCollection
     public void remove(int index) {
+        Vacation toRemove = vacationCollection.get(index);
         vacationCollection.remove(index);
+        EventLog.getInstance().logEvent(new Event("Removed vacation " + toRemove.getName()));
     }
 }

@@ -25,7 +25,7 @@ public class Attraction implements Writable {
         this.name = attractionName;
         this.completed = false;
         this.priority = 0;
-        this.comments = new ArrayList<String>();
+        this.comments = new ArrayList<>();
     }
 
     public String getName() {
@@ -45,6 +45,7 @@ public class Attraction implements Writable {
     }
 
     public void setName(String name) {
+        EventLog.getInstance().logEvent(new Event("Attraction: " + this.name + " changed name to " + name));
         this.name = name;
     }
 
@@ -52,12 +53,14 @@ public class Attraction implements Writable {
     // EFFECT: Change the completed status to true
     public void markCompleted() {
         this.completed = true;
+        EventLog.getInstance().logEvent(new Event("Attraction: " + this.name + " marked as complete"));
     }
 
     // MODIFIES: this
     // EFFECT: Changes the completed status to false
     public void markNotCompleted() {
         this.completed = false;
+        EventLog.getInstance().logEvent(new Event("Attraction: " + this.name + " marked as not complete"));
     }
 
     // MODIFIES: this
@@ -66,6 +69,8 @@ public class Attraction implements Writable {
     public boolean changePriority(int priority) {
         if (priority >= 0 && priority <= 5) {
             this.priority = priority;
+            EventLog.getInstance().logEvent(new Event("Attraction: " + this.name + " changed priority to "
+                    + priority));
             return true;
         } else {
             return false;
@@ -76,6 +81,7 @@ public class Attraction implements Writable {
     // EFFECT: Adds a comment to the attraction
     public void addComment(String comment) {
         this.comments.add(comment);
+        EventLog.getInstance().logEvent(new Event("Attraction: " + this.name + " added comment"));
     }
 
     // MODIFIES: this
@@ -85,6 +91,7 @@ public class Attraction implements Writable {
     public void removeComment(int position) {
         if (position >= 0 && position <= this.comments.size()) {
             this.comments.remove(position - 1);
+            EventLog.getInstance().logEvent(new Event("Attraction: " + this.name + " removed comment"));
         }
     }
 

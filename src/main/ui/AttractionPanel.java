@@ -337,7 +337,7 @@ public class AttractionPanel extends JPanel {
             filledStar.setAlignmentX(Component.CENTER_ALIGNMENT);
             stars.add(filledStar);
         }
-        for (int i = 1; i <= attraction.MAX_PRIORITY - priority; i++) {
+        for (int i = 1; i <= Attraction.MAX_PRIORITY - priority; i++) {
             JLabel emptyStar = new JLabel(emptyStarImage);
             emptyStar.setAlignmentX(Component.CENTER_ALIGNMENT);
             stars.add(emptyStar);

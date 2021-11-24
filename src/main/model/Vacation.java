@@ -42,15 +42,18 @@ public class Vacation implements Writable {
         }
         if (result) {
             listOfAttractions.add(attraction);
+            EventLog.getInstance().logEvent(new Event("Vacation: "
+                    + this.name + " added attraction " + attraction.getName()));
         }
         return result;
     }
 
     // MODIFIES: this
     // EFFECT: Searches the listOfAttraction and removes the attraction with the given name
-    // NOTE: Unused for this iteration, will be using for future functionalities
     public void removeAttraction(String name) {
         listOfAttractions.removeIf(a -> a.getName().equals(name));
+        EventLog.getInstance().logEvent(new Event("Vacation: "
+                + this.name + " removed attraction " + name));
     }
 
     // EFFECT: Returns the Attraction at the given position starting at 1.
@@ -83,6 +86,8 @@ public class Vacation implements Writable {
     //NOTE: this method is unused in P1, will be used for later functionalities.
     public void sortAttractionsPriority() {
         listOfAttractions.sort(Comparator.comparing(Attraction::getPriority).reversed());
+        EventLog.getInstance().logEvent(new Event("Vacation: "
+                + this.name + " sorted by priority"));
     }
 
     @Override
