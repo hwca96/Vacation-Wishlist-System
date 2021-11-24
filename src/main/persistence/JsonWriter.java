@@ -1,5 +1,7 @@
 package persistence;
 
+import model.Event;
+import model.EventLog;
 import model.VacationCollection;
 import org.json.JSONObject;
 
@@ -31,6 +33,7 @@ public class JsonWriter {
     public void write(VacationCollection vacationCollection) {
         JSONObject json = vacationCollection.toJson();
         saveToFile(json.toString(TAB));
+        EventLog.getInstance().logEvent(new Event("Saved data as JSON to " + this.destination));
     }
 
     // MODIFIES: this

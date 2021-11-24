@@ -1,8 +1,6 @@
 package persistence;
 
-import model.Attraction;
-import model.Vacation;
-import model.VacationCollection;
+import model.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -29,6 +27,7 @@ public class JsonReader {
     public VacationCollection read() throws IOException {
         String jsonData = readFile(source);
         JSONObject jsonObject = new JSONObject(jsonData);
+        EventLog.getInstance().logEvent(new Event("Loaded data from JSON at " + this.source));
         return parseVacationCollection(jsonObject);
     }
 

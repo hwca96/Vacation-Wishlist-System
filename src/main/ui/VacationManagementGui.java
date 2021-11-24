@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.VacationCollection;
 import persistence.JsonReader;
 import persistence.JsonWriter;
@@ -8,6 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -34,9 +38,19 @@ public class VacationManagementGui extends JFrame implements ActionListener {
     // MODIFIES: this
     public VacationManagementGui() throws FileNotFoundException {
         super("Vacation Management System");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setMinimumSize(new Dimension(WIDTH, HEIGHT));
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                for (Event event : EventLog.getInstance()) {
+                    System.out.println(event.toString());
+                }
+                System.out.println("Application has closed");
+                System.exit(0);
+            }
+        });
 
+        setMinimumSize(new Dimension(WIDTH, HEIGHT));
 
         initializeDataFields();
         initializeUiFields();
@@ -44,7 +58,6 @@ public class VacationManagementGui extends JFrame implements ActionListener {
         this.pack();
 
         setVisible(true);
-
     }
 
     // MODIFIES: this
@@ -150,6 +163,10 @@ public class VacationManagementGui extends JFrame implements ActionListener {
             loadVacationCollection();
         }
         if (e.getSource() == exitItem) {
+            for (Event event : EventLog.getInstance()) {
+                System.out.println(event.toString());
+            }
+            System.out.println("Application has closed");
             System.exit(0);
         }
     }

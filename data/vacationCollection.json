@@ -4,7 +4,7 @@
         "attractions": [
             {
                 "comments": [],
-                "completed": false,
+                "completed": true,
                 "priority": 5,
                 "attractionName": "Osaka"
             },
@@ -21,7 +21,7 @@
         "attractions": [{
             "comments": ["Museum"],
             "completed": true,
-            "priority": 5,
+            "priority": 4,
             "attractionName": "Louvre"
         }]
     },
