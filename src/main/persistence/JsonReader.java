@@ -46,6 +46,7 @@ public class JsonReader {
     public VacationCollection parseVacationCollection(JSONObject jsonObject) {
         VacationCollection vacationCollection = new VacationCollection();
         addVacations(vacationCollection, jsonObject);
+
         return vacationCollection;
     }
 
