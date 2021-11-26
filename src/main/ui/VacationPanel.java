@@ -52,6 +52,8 @@ public class VacationPanel extends JPanel implements ListSelectionListener, Acti
         initializeUi();
     }
 
+    // MODIFIES: this
+    // EFFECT: Creates the UI components in this panel
     private void initializeUi() {
         attractionPanel = new AttractionPanel();
 

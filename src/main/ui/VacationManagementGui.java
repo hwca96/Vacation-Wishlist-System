@@ -42,10 +42,10 @@ public class VacationManagementGui extends JFrame implements ActionListener {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                EventLog.getInstance().logEvent(new Event("Application has closed"));
                 for (Event event : EventLog.getInstance()) {
                     System.out.println(event.toString());
                 }
-                System.out.println("Application has closed");
                 System.exit(0);
             }
         });
@@ -163,10 +163,10 @@ public class VacationManagementGui extends JFrame implements ActionListener {
             loadVacationCollection();
         }
         if (e.getSource() == exitItem) {
+            EventLog.getInstance().logEvent(new Event("Application has closed"));
             for (Event event : EventLog.getInstance()) {
                 System.out.println(event.toString());
             }
-            System.out.println("Application has closed");
             System.exit(0);
         }
     }
